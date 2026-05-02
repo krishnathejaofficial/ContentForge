@@ -280,4 +280,5 @@ async def _run_pipeline(
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 8000))
-    uvicorn.run("main:app", host="0.0.0.0", port=port, reload=True)
+    is_prod = os.getenv("RENDER") is not None or os.getenv("RAILWAY_ENVIRONMENT") is not None
+    uvicorn.run("main:app", host="0.0.0.0", port=port, reload=not is_prod)
