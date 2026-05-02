@@ -32,8 +32,8 @@ FACT_JSON  = ASSETS_DIR / "fact_datasets.json"
 OUTPUT_DIR.mkdir(exist_ok=True)
 
 # ─── Video Settings ───────────────────────────────────────────────────────────
-VIDEO_WIDTH  = 1080
-VIDEO_HEIGHT = 1920
+VIDEO_WIDTH  = 720
+VIDEO_HEIGHT = 1280
 VIDEO_FPS    = 24
 
 # ─── TTS Settings ─────────────────────────────────────────────────────────────
