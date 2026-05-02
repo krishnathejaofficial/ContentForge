@@ -249,7 +249,7 @@ def compose_reel(
         codec="libx264", audio_codec="aac",
         fps=VIDEO_FPS,
         preset="ultrafast",                      # fastest encoding
-        ffmpeg_params=["-crf","25","-threads","2"],
+        ffmpeg_params=["-crf","28","-threads","1"],
         logger=None,
     )
     logger.info(f"[Composer] Done → {output_path}")

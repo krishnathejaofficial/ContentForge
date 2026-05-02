@@ -344,7 +344,7 @@ def compose_quiz_video(
     clip.write_videofile(
         output_path, codec="libx264", audio_codec="aac",
         fps=VIDEO_FPS, preset="ultrafast",
-        ffmpeg_params=["-crf","25","-threads","2"], logger=None,
+        ffmpeg_params=["-crf","28","-threads","1"], logger=None,
     )
     logger.info(f"[QuizComposer] Done → {output_path}")
     return output_path

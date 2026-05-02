@@ -532,7 +532,7 @@
           const res = await fetch(`/status/${job_id}`);
           if (!res.ok) {
             failCount++;
-            if (failCount > 15) throw new Error("Server disconnected too many times.");
+            if (failCount > 60) throw new Error("Server disconnected too many times.");
             return; // skip this cycle
           }
           const job = await res.json();
@@ -554,13 +554,13 @@
         } catch (err) {
           console.warn('Poll skip:', err.message);
           failCount++;
-          if (failCount > 15) {
+          if (failCount > 60) {
             clearInterval(interval);
-            showError('Server timed out. It might still be processing in the background, but the connection was lost.');
+            showError('Server timed out completely. The video might be too complex for the free server.');
             resetBtn();
           }
         }
-      }, 3000); // Poll every 3s instead of 2s to reduce load
+      }, 10000); // Poll every 10s. Server CPU is highly throttled on Render Free Tier.
     }
 
     function showResult(result, job_id) {
