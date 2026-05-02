@@ -129,7 +129,7 @@ def _pexels_images(query: str, count: int = 5) -> List[bytes]:
         result = []
         for photo in photos[:count]:
             src = photo["src"]
-            url = src.get("large2x") or src.get("large") or src.get("original")
+            url = src.get("large") or src.get("medium") or src.get("large2x")
             try:
                 ir = requests.get(url, timeout=20)
                 ir.raise_for_status()
