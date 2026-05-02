@@ -241,14 +241,23 @@ async def generate_voiceover(
             timed_captions = _sentences_to_caption_lines(sentence_timings)
             logger.info(f"[TTS] Got {len(timed_captions)} caption segments from sentence boundaries")
         except Exception as e:
-            logger.warning(f"[TTS] Streaming failed ({e}), falling back to save()")
+            logger.warning(f"[TTS] Edge-TTS failed ({e}), falling back to Google TTS (gTTS)...")
+            from gtts import gTTS
             with tempfile.NamedTemporaryFile(suffix=".mp3", delete=False) as tmp:
                 tmp_path = tmp.name
-            comm = edge_tts.Communicate(clean, voice, rate="-5%", volume="+8%")
-            await comm.save(tmp_path)
+            
+            # gTTS is a synchronous network call, wrap in to_thread if you like, but simple call is fine here
+            import anyio
+            def _run_gtts():
+                tts = gTTS(text=clean, lang='en', slow=False)
+                tts.save(tmp_path)
+            await anyio.to_thread.run_sync(_run_gtts)
+            
             with open(tmp_path, "rb") as f:
                 raw_bytes = f.read()
             os.unlink(tmp_path)
+            # Empty timed_captions since gTTS doesn't support timestamps, main.py will fallback to script lines
+            timed_captions = []
 
         # Write raw mp3 bytes to temp file
         with tempfile.NamedTemporaryFile(suffix=".mp3", delete=False) as tmp:
