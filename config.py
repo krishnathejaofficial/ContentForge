@@ -6,8 +6,9 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
-# Explicitly tell MoviePy where ImageMagick is installed to prevent [WinError 2]
-os.environ["IMAGEMAGICK_BINARY"] = r"C:\Program Files\ImageMagick-7.1.2-Q16-HDRI\magick.exe"
+# We use pure Pillow for text rendering (engines/text_overlay.py), 
+# so MoviePy's TextClip / ImageMagick is no longer required!
+
 
 load_dotenv()
 
