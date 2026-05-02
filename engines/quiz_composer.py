@@ -329,12 +329,8 @@ def compose_quiz_video(
 
     def make_frame(t):
         ph, alpha = get_phase(t)
-        # Slow Ken Burns pan on bg
-        prog  = min(t/max(total_dur,1), 1.0)
-        nw,nh = int(W*(1+0.08*prog)), int(H*(1+0.08*prog))
-        src   = Image.fromarray(bg).resize((nw,nh),Image.Resampling.BILINEAR)
-        l,top = (nw-W)//2, (nh-H)//2
-        bg_f  = np.array(src)[top:top+H, l:l+W]
+        # Static background to prevent Memory Leaks / OOM on Render Free Tier
+        bg_f = bg
 
         if video_type == "quiz":
             return render_quiz_frame(bg_f, quiz, ph, alpha)
@@ -346,7 +342,7 @@ def compose_quiz_video(
     clip.write_videofile(
         output_path, codec="libx264", audio_codec="aac",
         fps=VIDEO_FPS, preset="ultrafast",
-        ffmpeg_params=["-crf","23","-threads","4"], logger=None,
+        ffmpeg_params=["-crf","25","-threads","2"], logger=None,
     )
     logger.info(f"[QuizComposer] Done → {output_path}")
     return output_path
