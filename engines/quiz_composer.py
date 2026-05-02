@@ -328,6 +328,8 @@ def compose_quiz_video(
         return phases[-1][2], 1.0
 
     def make_frame(t):
+        import time
+        time.sleep(0.001)  # Yield GIL to allow FastAPI to respond to polls
         ph, alpha = get_phase(t)
         # Static background to prevent Memory Leaks / OOM on Render Free Tier
         bg_f = bg

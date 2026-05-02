@@ -526,10 +526,17 @@
     });
 
     function pollJob(job_id) {
+      let failCount = 0;
       const interval = setInterval(async () => {
         try {
           const res = await fetch(`/status/${job_id}`);
+          if (!res.ok) {
+            failCount++;
+            if (failCount > 15) throw new Error("Server disconnected too many times.");
+            return; // skip this cycle
+          }
           const job = await res.json();
+          failCount = 0; // reset on success
 
           const pct = getProgressPct(job.progress);
           progressBar.style.width = pct + '%';
@@ -545,11 +552,15 @@
             resetBtn();
           }
         } catch (err) {
-          clearInterval(interval);
-          showError('Polling failed: ' + err.message);
-          resetBtn();
+          console.warn('Poll skip:', err.message);
+          failCount++;
+          if (failCount > 15) {
+            clearInterval(interval);
+            showError('Server timed out. It might still be processing in the background, but the connection was lost.');
+            resetBtn();
+          }
         }
-      }, 2000);
+      }, 3000); // Poll every 3s instead of 2s to reduce load
     }
 
     function showResult(result, job_id) {

@@ -185,6 +185,8 @@ def compose_reel(
 
     # ── Background VideoClip (all numpy, no PIL per frame) ────────────────────
     def bg_make_frame(t: float) -> np.ndarray:
+        import time
+        time.sleep(0.001)  # Yield GIL to allow FastAPI to respond to polls
         seg_idx  = min(int(t / seg_dur), n_segs-1)
         local_t  = t - seg_idx * seg_dur
         progress = min(local_t / max(seg_dur, 1), 1.0)
