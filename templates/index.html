@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ContentForge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #111118;
+      --border: #1e1e2e;
+      --accent: #7c3aed;
+      --accent2: #06b6d4;
+      --text: #e2e8f0;
+      --muted: #64748b;
+      --success: #10b981;
+      --error: #ef4444;
+      --radius: 12px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+
+    .container { max-width: 680px; margin: 0 auto; }
+
+    /* ── Header ── */
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-family: 'Space Mono', monospace;
+      font-size: 2.2rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -1px;
+    }
+
+    .tagline {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-top: 0.5rem;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Card ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .card-title {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent2);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 1rem;
+    }
+
+    /* ── Form ── */
+    .field { margin-bottom: 1.25rem; }
+
+    label {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+      font-weight: 500;
+    }
+
+    select, input[type="text"] {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.65rem 0.9rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-family: 'Inter', sans-serif;
+      appearance: none;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    select:focus, input[type="text"]:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    /* Custom select arrow */
+    .select-wrap { position: relative; }
+    .select-wrap::after {
+      content: "▾";
+      position: absolute;
+      right: 0.9rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      pointer-events: none;
+      font-size: 0.8rem;
+    }
+
+    /* ── Toggle ── */
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .toggle {
+      position: relative;
+      width: 44px;
+      height: 24px;
+      cursor: pointer;
+    }
+
+    .toggle input { opacity: 0; width: 0; height: 0; }
+
+    .slider {
+      position: absolute;
+      inset: 0;
+      background: var(--border);
+      border-radius: 24px;
+      transition: 0.3s;
+    }
+
+    .slider::before {
+      content: "";
+      position: absolute;
+      left: 3px;
+      top: 3px;
+      width: 18px;
+      height: 18px;
+      background: white;
+      border-radius: 50%;
+      transition: 0.3s;
+    }
+
+    .toggle input:checked + .slider { background: var(--accent); }
+    .toggle input:checked + .slider::before { transform: translateX(20px); }
+
+    .toggle-label { font-size: 0.85rem; color: var(--text); }
+
+    /* ── Button ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #6d28d9);
+      color: white;
+      width: 100%;
+      justify-content: center;
+      font-size: 1rem;
+      padding: 0.9rem;
+      letter-spacing: 0.02em;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(124, 58, 237, 0.35);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Video type tabs */
+    .type-tabs {
+      display: flex; gap: 0.5rem;
+    }
+    .type-tab {
+      flex: 1; padding: 0.55rem 0.5rem;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .type-tab:hover { border-color: var(--accent); color: var(--accent); }
+    .type-tab.active {
+      background: linear-gradient(135deg, var(--accent), #6d28d9);
+      border-color: transparent;
+      color: white;
+    }
+    .type-tab[data-type="quiz"].active { background: linear-gradient(135deg,#f59e0b,#d97706); }
+    .type-tab[data-type="puzzle"].active { background: linear-gradient(135deg,#10b981,#059669); }
+
+    .btn-secondary {
+      background: var(--border);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover { background: #2a2a3e; }
+
+    .btn-download {
+      background: linear-gradient(135deg, var(--success), #059669);
+      color: white;
+      width: 100%;
+      justify-content: center;
+      font-size: 0.95rem;
+      padding: 0.85rem;
+    }
+
+    /* ── Progress ── */
+    #progress-section { display: none; }
+
+    .progress-bar-track {
+      background: var(--border);
+      border-radius: 99px;
+      height: 6px;
+      overflow: hidden;
+      margin-bottom: 0.75rem;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      width: 0%;
+      transition: width 0.5s ease;
+      animation: shimmer 2s infinite linear;
+      background-size: 200% 100%;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    .progress-text {
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-family: 'Space Mono', monospace;
+    }
+
+    /* ── Result ── */
+    #result-section { display: none; }
+
+    video {
+      width: 100%;
+      border-radius: var(--radius);
+      margin-bottom: 1rem;
+      max-height: 400px;
+      object-fit: contain;
+      background: black;
+    }
+
+    .meta-grid {
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .meta-item {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+    }
+
+    .meta-item-label {
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.35rem;
+    }
+
+    .meta-item-value {
+      font-size: 0.88rem;
+      line-height: 1.5;
+      word-break: break-word;
+    }
+
+    .hashtag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.35rem;
+    }
+
+    .hashtag {
+      background: rgba(124, 58, 237, 0.15);
+      color: #a78bfa;
+      border: 1px solid rgba(124, 58, 237, 0.3);
+      border-radius: 99px;
+      padding: 0.2rem 0.65rem;
+      font-size: 0.78rem;
+    }
+
+    /* ── Error ── */
+    .error-box {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+      color: #fca5a5;
+      font-size: 0.85rem;
+    }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 2rem 0 1rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">ContentForge</div>
+      <p class="tagline">AI-powered short-form video generator · Free · Open Source</p>
+    </header>
+
+    <!-- Generator Form -->
+    <div class="card">
+      <div class="card-title">⚡ Generate Video</div>
+
+      <form id="gen-form">
+        <!-- Video Type Selector -->
+        <div class="field">
+          <label>Video Type</label>
+          <div class="type-tabs" id="type-tabs">
+            <button type="button" class="type-tab active" data-type="reel">🎬 Reel</button>
+            <button type="button" class="type-tab" data-type="quiz">🧠 Quiz</button>
+            <button type="button" class="type-tab" data-type="puzzle">🧩 Puzzle</button>
+          </div>
+          <input type="hidden" name="video_type" id="video_type" value="reel" />
+        </div>
+
+        <div class="field">
+          <label>Category</label>
+          <div class="select-wrap">
+            <select name="category" id="category">
+              {% for cat in categories %}
+              <option value="{{ cat }}">{{ cat.replace('_', ' ').title() }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Voice</label>
+          <div class="select-wrap">
+            <select name="voice" id="voice">
+              {% for v in voices %}
+              <option value="{{ v }}">{{ v }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+
+        <div class="field" id="font-field">
+          <label>Font Style</label>
+          <div class="select-wrap">
+            <select name="font" id="font">
+              {% for name, file in fonts.items() %}
+              <option value="{{ file }}">{{ name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+
+        <div class="field" id="bgm-field">
+          <div class="toggle-row">
+            <label class="toggle">
+              <input type="checkbox" name="use_bgm" id="use_bgm" />
+              <span class="slider"></span>
+            </label>
+            <span class="toggle-label">Background Music</span>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="gen-btn">
+          🎬 Generate Reel
+        </button>
+      </form>
+    </div>
+
+    <!-- Progress -->
+    <div class="card" id="progress-section">
+      <div class="card-title">⏳ Generating</div>
+      <div class="progress-bar-track">
+        <div class="progress-bar-fill" id="progress-bar"></div>
+      </div>
+      <div class="progress-text" id="progress-text">Starting...</div>
+    </div>
+
+    <!-- Result -->
+    <div id="result-section">
+      <div class="card">
+        <div class="card-title">🎥 Preview</div>
+        <video id="preview-video" controls playsinline></video>
+        <a id="download-link" href="#" class="btn btn-download">
+          ⬇️ Download Video
+        </a>
+      </div>
+
+      <div class="card">
+        <div class="card-title">📋 Platform Captions</div>
+        <div class="meta-grid" id="meta-grid"></div>
+      </div>
+    </div>
+
+    <!-- Error -->
+    <div id="error-section" style="display:none;" class="card">
+      <div class="error-box" id="error-text"></div>
+    </div>
+
+    <footer>ContentForge · Built with FastAPI, MoviePy, Edge-TTS</footer>
+  </div>
+
+  <script>
+    const form = document.getElementById('gen-form');
+    const genBtn = document.getElementById('gen-btn');
+    const progressSection = document.getElementById('progress-section');
+    const progressBar = document.getElementById('progress-bar');
+    const progressText = document.getElementById('progress-text');
+    const resultSection = document.getElementById('result-section');
+    const errorSection = document.getElementById('error-section');
+    const errorText = document.getElementById('error-text');
+
+    // ── Video Type Tab Switching ─────────────────────────────────────────────
+    const typeTabs   = document.querySelectorAll('.type-tab');
+    const typeInput  = document.getElementById('video_type');
+    const fontField  = document.getElementById('font-field');
+    const bgmField   = document.getElementById('bgm-field');
+    const BTN_LABELS = { reel:'🎬 Generate Reel', quiz:'🧠 Generate Quiz', puzzle:'🧩 Generate Puzzle' };
+    const BTN_GRADS  = {
+      reel:   'linear-gradient(135deg,#7c3aed,#6d28d9)',
+      quiz:   'linear-gradient(135deg,#f59e0b,#d97706)',
+      puzzle: 'linear-gradient(135deg,#10b981,#059669)',
+    };
+
+    typeTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        typeTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const t = tab.dataset.type;
+        typeInput.value = t;
+        genBtn.textContent = BTN_LABELS[t] || '🎬 Generate';
+        genBtn.style.background = BTN_GRADS[t] || BTN_GRADS.reel;
+        const reelOnly = t === 'reel';
+        fontField.style.display = reelOnly ? '' : 'none';
+        bgmField.style.display  = reelOnly ? '' : 'none';
+      });
+    });
+
+    const PROGRESS_STEPS = {
+      'queued': 5,
+      'Fetching': 20,
+      'Generating script': 38,
+      'Downloading': 52,
+      'Generating voice': 65,
+      'Composing': 80,
+      'Formatting': 92,
+      'Done': 100,
+    };
+
+    function getProgressPct(msg) {
+      for (const [key, pct] of Object.entries(PROGRESS_STEPS)) {
+        if (msg && msg.toLowerCase().includes(key.toLowerCase())) return pct;
+      }
+      return 50;
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      genBtn.disabled = true;
+      genBtn.textContent = 'Generating...';
+      progressSection.style.display = 'block';
+      resultSection.style.display = 'none';
+      errorSection.style.display = 'none';
+      progressBar.style.width = '5%';
+      progressText.textContent = 'Queuing job...';
+
+      const data = new FormData(form);
+
+      // Fix: FormData doesn't capture unchecked checkboxes
+      if (!form.use_bgm.checked) data.set('use_bgm', 'false');
+
+      try {
+        const res = await fetch('/generate', { method: 'POST', body: data });
+        const { job_id } = await res.json();
+        pollJob(job_id);
+      } catch (err) {
+        showError('Failed to start job: ' + err.message);
+        resetBtn();
+      }
+    });
+
+    function pollJob(job_id) {
+      const interval = setInterval(async () => {
+        try {
+          const res = await fetch(`/status/${job_id}`);
+          const job = await res.json();
+
+          const pct = getProgressPct(job.progress);
+          progressBar.style.width = pct + '%';
+          progressText.textContent = job.progress || 'Processing...';
+
+          if (job.status === 'done') {
+            clearInterval(interval);
+            showResult(job.result, job_id);
+            resetBtn();
+          } else if (job.status === 'error') {
+            clearInterval(interval);
+            showError(job.error || 'Unknown error');
+            resetBtn();
+          }
+        } catch (err) {
+          clearInterval(interval);
+          showError('Polling failed: ' + err.message);
+          resetBtn();
+        }
+      }, 2000);
+    }
+
+    function showResult(result, job_id) {
+      progressSection.style.display = 'none';
+      resultSection.style.display = 'block';
+
+      const video = document.getElementById('preview-video');
+      video.src = result.video_url;
+
+      const dl = document.getElementById('download-link');
+      dl.href = `/download-package/${job_id}`;
+      dl.textContent = '⬇️ Download Package (Video + Captions)';
+
+      // Build meta cards
+      const grid = document.getElementById('meta-grid');
+      grid.innerHTML = '';
+
+      // Narration
+      addMeta(grid, '🗣 Narration', result.script?.narration || '—');
+
+      // YouTube
+      if (result.platforms?.youtube) {
+        addMeta(grid, '▶️ YouTube Title', result.platforms.youtube.title || '—');
+      }
+
+      // Instagram caption snippet
+      if (result.platforms?.instagram) {
+        const cap = result.platforms.instagram.caption || '';
+        addMeta(grid, '📸 Instagram Caption', cap.slice(0, 200) + (cap.length > 200 ? '...' : ''));
+      }
+
+      // Hashtags
+      const tags = result.hashtags || [];
+      if (tags.length) {
+        const tagEl = document.createElement('div');
+        tagEl.className = 'meta-item';
+        tagEl.innerHTML = `<div class="meta-item-label">🏷 Hashtags</div>
+          <div class="hashtag-list">${tags.map(t => `<span class="hashtag">#${t}</span>`).join('')}</div>`;
+        grid.appendChild(tagEl);
+      }
+
+      // Source
+      addMeta(grid, '🔗 Content Source', result.source || 'local-dataset');
+    }
+
+    function addMeta(grid, label, value) {
+      const el = document.createElement('div');
+      el.className = 'meta-item';
+      el.innerHTML = `<div class="meta-item-label">${label}</div><div class="meta-item-value">${escHtml(value)}</div>`;
+      grid.appendChild(el);
+    }
+
+    function escHtml(s) {
+      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    function showError(msg) {
+      progressSection.style.display = 'none';
+      errorSection.style.display = 'block';
+      errorText.textContent = '⚠️ ' + msg;
+    }
+
+    function resetBtn() {
+      genBtn.disabled = false;
+      genBtn.textContent = '🎬 Generate Reel';
+    }
+  </script>
+</body>
+</html>

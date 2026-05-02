@@ -1,0 +1,108 @@
+{
+  "_note": "Run python generate_fallbacks.py to populate this file with facts.",
+  "facts": [
+    "The shortest war in history lasted only 38 to 45 minutes — the Anglo-Zanzibar War of 1896.",
+    "A group of flamingos is called a flamboyance.",
+    "Humans share 60% of their DNA with bananas.",
+    "The Eiffel Tower can be 15 cm taller during summer due to thermal expansion.",
+    "Cleopatra lived closer in time to the Moon landing than to the construction of the Great Pyramid."
+  ],
+  "science": [
+    "Water can boil and freeze at the same time — a phenomenon called the triple point.",
+    "A teaspoon of neutron star material would weigh about 10 million tons.",
+    "The human eye can detect a single photon of light in complete darkness.",
+    "DNA is so tightly packed that if all human DNA were stretched out, it would reach Pluto and back — 17 times.",
+    "Glass is technically a supercooled liquid, not a solid."
+  ],
+  "biology": [
+    "Your stomach gets a new lining every 3–4 days to protect itself from its own acid.",
+    "The human liver performs over 500 different functions.",
+    "Bone is five times stronger than steel by weight.",
+    "Your nose can detect over 1 trillion different scents.",
+    "The human body has more bacterial cells than human cells — by a factor of 1.3 to 1."
+  ],
+  "history": [
+    "Napoleon Bonaparte was actually of average height for his era — around 5'7\".",
+    "Oxford University is older than the Aztec Empire.",
+    "The fax machine was invented before the telephone.",
+    "Ancient Romans used crushed mouse brains as toothpaste.",
+    "The first computer programmer was Ada Lovelace, who worked in the 1840s."
+  ],
+  "technology": [
+    "The first iPhone had less processing power than a modern microwave.",
+    "Email was invented before the World Wide Web.",
+    "The first computer mouse was made of wood.",
+    "Google processes over 8.5 billion searches per day.",
+    "The average person spends over 6 hours per day on screens."
+  ],
+  "space": [
+    "There are more stars in the universe than grains of sand on all of Earth's beaches.",
+    "A day on Venus is longer than a year on Venus.",
+    "Footprints left on the Moon will remain for at least 100 million years.",
+    "The Sun accounts for 99.86% of all mass in the Solar System.",
+    "There is a planet made mostly of diamond — 55 Cancri e."
+  ],
+  "psychology": [
+    "The brain can process images in as little as 13 milliseconds.",
+    "Memories are reconstructed every time you recall them — meaning they change slightly each time.",
+    "People are more creative after a shower because warm water relaxes the prefrontal cortex.",
+    "The mere act of smiling can actually make you feel happier.",
+    "Multitasking reduces productivity by up to 40%."
+  ],
+  "health": [
+    "Sleeping fewer than 7 hours a night doubles your risk of catching a cold.",
+    "The gut microbiome contains 100 trillion bacteria that influence mood and health.",
+    "A 20-minute nap improves alertness and performance more than caffeine.",
+    "Chronic loneliness is as damaging to your health as smoking 15 cigarettes a day.",
+    "Cold exposure activates brown fat cells, which burn energy to generate heat."
+  ],
+  "nature": [
+    "Trees communicate and share resources through underground fungal networks called the Wood Wide Web.",
+    "A single mature oak tree can support over 500 species of insects, birds, and fungi.",
+    "Whale songs can travel thousands of miles through the ocean.",
+    "The largest living organism on Earth is a honey fungus in Oregon covering 8.9 km².",
+    "Lightning strikes Earth about 100 times every second."
+  ],
+  "animals": [
+    "Crows can recognise and remember human faces for years.",
+    "Octopuses have three hearts, nine brains, and blue blood.",
+    "Tardigrades can survive in the vacuum of space, extreme radiation, and temperatures near absolute zero.",
+    "Elephants are the only animals known to hold funerals for their dead.",
+    "Pistol shrimp snap their claws so fast they create a flash of light hotter than the surface of the Sun."
+  ],
+  "food": [
+    "Honey never spoils — archaeologists have found edible honey in 3,000-year-old Egyptian tombs.",
+    "Chocolate was once used as currency by the Aztecs.",
+    "Apples, pears, and roses all belong to the same plant family — Rosaceae.",
+    "The spiciness of chillies is measured in Scoville Heat Units.",
+    "Avocados are technically berries, while strawberries are not."
+  ],
+  "mathematics": [
+    "Zero is the only number that cannot be represented by Roman numerals.",
+    "A googol is 1 followed by 100 zeros — and a googolplex has a googol of zeros.",
+    "The Fibonacci sequence appears in sunflower seeds, nautilus shells, and galaxy spirals.",
+    "Pi has been calculated to over 100 trillion decimal places — and no pattern has ever been found.",
+    "In a room of just 23 people, there is a 50% chance two share the same birthday."
+  ],
+  "geography": [
+    "Canada has more lakes than all other countries combined.",
+    "Russia spans 11 time zones and covers 11% of Earth's land area.",
+    "The Sahara Desert is roughly the same size as the entire United States.",
+    "New Zealand was the first country to give women the right to vote, in 1893.",
+    "The Dead Sea is so salty that you float effortlessly — and it is 430m below sea level."
+  ],
+  "mythology": [
+    "The word 'volcano' comes from Vulcan, the Roman god of fire.",
+    "In Norse mythology, the world will end in Ragnarok — a battle of gods and giants.",
+    "Ancient Greeks believed the heart was the seat of intelligence, not the brain.",
+    "The Egyptian god Thoth was said to have invented writing, mathematics, and science.",
+    "In Hindu mythology, the universe goes through endless cycles of creation and destruction."
+  ],
+  "inventions": [
+    "The microwave was invented accidentally when radar waves melted a chocolate bar in an engineer's pocket.",
+    "Post-it notes were invented from a failed attempt to create a super-strong adhesive.",
+    "The World Wide Web was invented in 1989 by Tim Berners-Lee as an internal document system at CERN.",
+    "Velcro was inspired by burr seeds sticking to a dog's fur during a walk.",
+    "The first ATM was installed in London in 1967."
+  ]
+}
