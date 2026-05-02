@@ -29,7 +29,7 @@ logger = logging.getLogger(__name__)
 
 W, H   = VIDEO_WIDTH, VIDEO_HEIGHT
 XFADE  = 0.6   # crossfade seconds between backgrounds
-N_KEYS = 10    # keyframes per background segment
+N_KEYS = 3    # keyframes per background segment (lowered for 512MB RAM limit)
 
 KB_MODES = [
     (+1, +1,  0), (+1, -1,  0), (+1,  0, +1),
